@@ -1,0 +1,34 @@
+
+.DS_Store
+.idea
+.vscode
+logs
+
+# test
+coverage
+
+# python
+development.py
+__pycache__
+*.py[cod]
+
+# js
+npm-debug.log
+node_modules
+.awcache
+
+dump.rdb
+
+# sublime-project
+tale.sublime-project
+tale.sublime-workspace
+
+# test dir
+service/test
+service/tmp
+
+# logs dir
+service/logs
+
+.python-version
+
