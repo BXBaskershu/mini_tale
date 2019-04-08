@@ -1,0 +1,2 @@
+class DbCommitException(Exception):
+    pass

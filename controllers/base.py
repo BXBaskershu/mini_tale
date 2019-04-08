@@ -77,7 +77,7 @@ class BaseController(BaseResource):
         elif request_type == RequestType.POST:
             route_method = '_post_{}'.format(method if method else 'index')
         else:
-            return Response.error('请求的方法不存在')
+            return Response.error('路由错误', 'system routing error')
 
         # 如果route_method为空或者contorller中没有route_method方法
         if route_method is None or not hasattr(self, route_method):
