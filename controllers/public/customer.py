@@ -108,6 +108,12 @@ class CustomerController(BaseController):
         telephone = args.get('telephone')
         customer_type = args.get('customer_type')
 
+        if Customer.query.filter_by(short_name=short_name).first():
+            return Response.error('请求出错', f'{short_name}已经添加在customer列表中了')
+
+        if Customer.query.filter_by(full_name=full_name).first():
+            return Response.error('请求出错', f'{full_name}已经添加在customer列表中了')
+
         if not Validator.validate_phone(telephone):
             return Response.error('请求出错', 'telephone不是一个有效的电话号码')
 

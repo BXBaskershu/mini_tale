@@ -26,8 +26,8 @@ class Customer(DbMixin, db.Model):
     __bind_key__ = 'mysql'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    short_name = db.Column(db.String(64), nullable=False, index=True)
-    full_name = db.Column(db.String(128), nullable=False, index=True)
+    short_name = db.Column(db.String(64), nullable=False, unique=True, index=True)
+    full_name = db.Column(db.String(128), nullable=False, unique=True, index=True)
     customer_type = db.Column(TINYINT, nullable=False, default=CustomerType.COMPANY)
     telephone = db.Column(db.String(20), nullable=False)
     create_time = db.Column(db.Integer, nullable=False, default=get_current_timestamp)
