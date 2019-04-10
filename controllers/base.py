@@ -72,8 +72,7 @@ class BaseController(BaseResource):
         """
         route_method = None
         if request_type == RequestType.GET:
-            content = dict(msg='这是一个get方法')
-            return Response.construct_response(content)
+            route_method = '_get_{}'.format(method if method else 'index')
         elif request_type == RequestType.POST:
             route_method = '_post_{}'.format(method if method else 'index')
         else:
