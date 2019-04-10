@@ -23,11 +23,18 @@ class LocalConfig(BaseConfig):
     # database
     MYSQL_SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1:3333/bx_crm'
     PG_SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:123456@127.0.0.1:5555/bx_crm'
-    # SQLALCHEMY_DATABASE_URI = MYSQL_SQLALCHEMY_DATABASE_URI
     SQLALCHEMY_BINDS = {
         'mysql': MYSQL_SQLALCHEMY_DATABASE_URI,
         'pg': PG_SQLALCHEMY_DATABASE_URI,
     }
+
+    # redis
+    REDIS_URL = "redis://127.0.0.1:6379/0"
+
+    # celery
+    CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
+    CELERY_BROKER_URL = REDIS_URL
+    CELERY_RESULT_BACKEND = REDIS_URL
 
 
 configs = {
