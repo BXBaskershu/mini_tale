@@ -1,13 +1,14 @@
 import os
 
 from celery import Celery
+from sqlalchemy import create_engine
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
 from config import configs
 
-__all__ = ('db', 'app', 'celery')
+__all__ = ('db', 'app', 'celery', 'pg_engine')
 
 config = configs[os.environ.get('tale_config_module', 'local')]
 
@@ -41,6 +42,9 @@ def create_app():
     db.init_app(app)
     return db, app
 
+
+# 创建数据库连接引擎，用于手动执行sql语句或者数据库方法
+pg_engine = create_engine(config.PG_SQLALCHEMY_DATABASE_URI)
 
 db, app = create_app()
 celery = make_celery(app)

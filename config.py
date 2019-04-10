@@ -1,6 +1,3 @@
-from celery.schedules import crontab
-
-
 class BaseConfig:
     """ 基础的配置文件 """
     # base
@@ -25,7 +22,7 @@ class LocalConfig(BaseConfig):
 
     # database
     MYSQL_SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@127.0.0.1:3333/bx_crm'
-    PG_SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:123456@127.0.0.1:5555/bx_crm'
+    PG_SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://postgres:123456@127.0.0.1:5432/bx_crm'
     SQLALCHEMY_BINDS = {
         'mysql': MYSQL_SQLALCHEMY_DATABASE_URI,
         'pg': PG_SQLALCHEMY_DATABASE_URI,
@@ -38,11 +35,11 @@ class LocalConfig(BaseConfig):
     CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'msgpack', 'yaml']
     CELERY_BROKER_URL = REDIS_URL
     CELERY_RESULT_BACKEND = REDIS_URL
-    CELERY_IMPORTS = ('mq.order')
+    CELERY_IMPORTS = ('tasks.order')
     CELERYBEAT_SCHEDULE = {
         'test_celery': {
-            'task': 'mq.order.test',
-            'schedule': 5
+            'task': 'tasks.order.calculate_achievement',
+            'schedule': 5*60  # 5分钟调用一次方法
         }
     }
 
